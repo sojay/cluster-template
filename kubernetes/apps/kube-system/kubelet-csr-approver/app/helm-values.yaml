@@ -1,0 +1,3 @@
+---
+providerRegex: ^(talos-controlplane)$
+bypassDnsResolution: true
