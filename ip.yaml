@@ -1,0 +1,44 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  creationTimestamp: "2024-08-12T03:46:45Z"
+  generation: 5
+  labels:
+    app.kubernetes.io/name: cilium-config
+    kustomize.toolkit.fluxcd.io/name: cilium-config
+    kustomize.toolkit.fluxcd.io/namespace: flux-system
+  name: l2-pool
+  resourceVersion: "10975471"
+  uid: bc3e58cd-abe0-41f8-b0f9-0fc154a53e1b
+spec:
+  allowFirstLastIPs: "Yes"
+  blocks:
+  - start: "192.168.0.140"
+    stop: "192.168.0.150"
+  disabled: false
+status:
+  conditions:
+  - lastTransitionTime: "2024-08-12T03:50:40Z"
+    message: ""
+    observedGeneration: 5
+    reason: resolved
+    status: "False"
+    type: cilium.io/PoolConflict
+  - lastTransitionTime: "2024-08-12T03:47:51Z"
+    message: "256"
+    observedGeneration: 5
+    reason: noreason
+    status: Unknown
+    type: cilium.io/IPsTotal
+  - lastTransitionTime: "2024-08-12T03:47:51Z"
+    message: "252"
+    observedGeneration: 5
+    reason: noreason
+    status: Unknown
+    type: cilium.io/IPsAvailable
+  - lastTransitionTime: "2024-08-12T03:47:52Z"
+    message: "4"
+    observedGeneration: 5
+    reason: noreason
+    status: Unknown
+    type: cilium.io/IPsUsed
