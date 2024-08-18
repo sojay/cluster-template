@@ -1,0 +1,29 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: qrcode-app
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/sojay/qrcode-app
+  ref:
+    branch: main
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/manifests/
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: qrcode-app
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./manifests
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: qrcode-app
+  targetNamespace: qrapp

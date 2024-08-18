@@ -7,6 +7,8 @@ metadata:
 spec:
   interval: 30m
   url: "https://github.com/sojay/cluster-template"
+  secretRef:
+    name: github-deploy-key
   ref:
     branch: "main"
   ignore: |
