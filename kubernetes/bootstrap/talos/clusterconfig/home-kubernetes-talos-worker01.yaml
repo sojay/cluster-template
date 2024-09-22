@@ -31,9 +31,9 @@ machine:
     hostname: talos-worker01
     interfaces:
       - deviceSelector:
-          hardwareAddr: bc:24:11:76:36:f5
+          hardwareAddr: bc:24:11:2c:cb:ee
         addresses:
-          - 192.168.0.222/25
+          - 192.168.0.235/25
         routes:
           - network: 0.0.0.0/0
             gateway: 192.168.0.1
