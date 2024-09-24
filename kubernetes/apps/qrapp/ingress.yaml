@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/target: external.samboxlab.top
+  generation: 1
+  labels:
+    kustomize.toolkit.fluxcd.io/name: qrcode-app
+    kustomize.toolkit.fluxcd.io/namespace: flux-system
+  name: qrapp
+  namespace: network
+spec:
+  ingressClassName: external
+  rules:
+  - host: qrcode.samboxlab.top
+    http:
+      paths:
+      - backend:
+          service:
+            name: qrapp-svc
+            port:
+              number: 5001
+        path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: qrapp-svc  # Ensure the correct service name
+            port:
+              number: 80       # Change this if you prefer HTTPS
+  tls:
+    - hosts:
+      - qrcode.samboxlab.top
+      secretName: samboxlab-top-production-tls
