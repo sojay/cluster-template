@@ -30,6 +30,8 @@ servers:
           fallthrough in-addr.arpa ip6.arpa
       - name: forward
         parameters: . /etc/resolv.conf
+      - name: forward
+        parameters: local.samboxlab.top 192.168.0.35
       - name: cache
         parameters: 30
       - name: loop
