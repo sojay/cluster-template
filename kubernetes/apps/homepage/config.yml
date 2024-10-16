@@ -1,0 +1,226 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage
+  namespace: network
+  labels:
+    app: homepage
+data:
+  kubernetes.yaml: |
+    mode: cluster
+  settings.yaml: |
+    title: Sambox Homepage
+
+    background:
+      image: https://images.unsplash.com/photo-1615474292303-d35ea46de8d1?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+      blur: sm # sm, md, xl... see https://tailwindcss.com/docs/backdrop-blur
+      saturate: 100 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+      brightness: 50 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+      opacity: 100 # 0-100
+
+    theme: dark
+    color: slate
+
+    useEqualHeights: true
+
+    layout:
+      Hypervisor:
+        header: true
+        style: row
+        columns: 2
+
+      DNS:
+        header: true
+        style: row
+        columns: 2
+
+      Storage:
+        header: true
+        style: row
+        columns: 2
+
+      Containers:
+        header: true
+        style: row
+        columns: 2
+
+      Network:
+        header: true
+        style: row
+        columns: 4
+
+      Self-Hosted:
+        header: true
+        style: column
+        columns: 4
+  custom.css: ""
+  custom.js: ""
+  bookmarks.yaml: ""
+  services.yaml: |
+    - Hypervisor:
+
+        - Proxmox:
+            icon: proxmox.svg
+            href: https://proxmox.local.samboxlab.top
+            description: PVE1
+            widget:
+                type: proxmox
+                url: https://192.168.0.30:8006
+                username: api@pam!homepage
+                password: b1607054-08f5-403d-9468-be87b87740ec
+                node: oldtown
+                # key: b1607054-08f5-403d-9468-be87b87740ec
+
+        - Proxmox:
+            icon: proxmox.png # icons found here https://github.com/walkxcode/dashboard-icons
+            href: https://odin.local.samboxlab.top
+            description: PVE2
+            widget:
+                type: proxmox
+                url: https://192.168.0.75:8006
+                username: apiodin@pam!homepage
+                password: a7c129aa-a5e3-4a5e-9d70-7813fbbee0de
+                node: odin
+                # key: b1607054-08f5-403d-9468-be87b87740ec
+
+
+    - DNS:
+        - Pi-Hole:
+            icon: pi-hole.svg
+            href: https://pihole.local.samboxlab.top/admin
+            description: quasar
+            widget:
+                type: pihole
+                url: http://192.168.0.35/admin
+                key: ee83ce68bad372b4b11d2e8610a794f6c817f02fd131e422c8ce7e4321c1a014
+
+        - traefik:
+            icon: traefik.svg
+            href: "https://traefik-dashboard.local.samboxlab.top"
+            description: internal
+            widget:
+                type: traefik
+                url: "https://192.168.0.25:80"
+                username: admin # optional
+                password: cloudboy! # optional
+
+    - Containers:
+        - Portainer:
+            icon: portainer.svg
+            href: "https://docker.local.samboxlab.top"
+            description: docker
+            widget:
+                type: portainer
+                url: "https://192.168.0.66:9443"
+                env: 2
+                key: "ptr_pYYs15HGROsAUkBe3tFFgeuNYkziKo1fx6Z+vv2U0m4="
+
+        - Watchtower:
+            icon: watchtower.svg
+            href: "http://192.168.0.66:8080"
+            description: docker
+            widget:
+                type: watchtower
+                url: http://192.168.0.66:8080
+                key: demotoken
+
+
+
+    - Network:
+        - UniFi:
+            icon: unifi.svg
+            href: "https://unifi.local.samboxlab.top"
+            description: network
+            widget:
+                type: unifi
+                url: "https://192.168.10:8443"
+                username: "therealsojay@icloud.com"
+                password: "cloudboy!"
+
+        - Uptime Kuma:
+            icon: uptime-kuma.svg
+            href: "https://monitor.local.samboxlab.top"
+            description: internal
+            widget:
+                type: uptimekuma
+                url: "https://monitor.local.samboxlab.top"
+                slug: sambox
+
+        - tailscale:
+            icon: tailscale.svg
+            href: "tailscale"
+            description: internal
+            widget:
+                type: tailscale
+                deviceid: nTiQCcffPf11CNTRL
+                key: tskey-api-k8eUZWsEsA11CNTRL-uZR4QeUQ7P8crQ7n7g59Q8YdU9rwSev7A
+
+        - Grafana:
+            icon: grafana.svg
+            href: "https://grafana.local.samboxlab.top"
+            description: internal
+            widget:
+                type: grafana
+                url: "https://grafana.local.samboxlab.top"
+                username: bigbull
+                password: cloudboy!
+
+
+    - Storage:
+        - TrueNAS:
+            icon: truenas.svg
+            href: "https://nas.local.samboxlab.top"
+            description: scale
+            widget:
+                type: truenas
+                url: "https://nas.local.samboxlab.top"
+                key: "1-0VR7szs3HrhrR47ZKg4iYt3AMcbGYsLCSLLOQpakkTHY2sBvP0e1J2IRBRIiuWSK"
+                enablePools: true # optional, defaults to false
+                nasType: scale # defaults to scale, must be set to 'core' if using enablePools with TrueNAS Core
+
+        - NextCloud:
+                icon: nextcloud.svg
+                href: "https://nextcloud.samboxlab.top"
+                description: truenas
+                widget:
+                    type: nextcloud
+                    url: "https://nextcloud.samboxlab.top"
+                    username: bigbull
+                    password: SeriousCloudboy10!
+
+
+    - Other:
+        - GitLab:
+            icon: gitlab.svg
+            href: https://gitlab.com
+            description: source code
+        - GitHub:
+            icon: github.svg
+            href: https://github.com
+            description: source code
+
+        - Gitea:
+            icon: gitea.svg
+            href: "https://git.samboxlab.top"
+            description: source code
+            widget:
+                type: gitea
+                url: http://git.samboxlab.top
+                key: giteaapitoken
+
+  widgets.yaml: |
+    - resources:
+        cpu: true
+        memory: true
+        disk: /
+
+    - datetime:
+        text_size: xl
+        format:
+          timeStyle: short
+
+    - search:
+        provider: google # <--- updated with google
+        target: _blank
+  docker.yaml: ""
+
