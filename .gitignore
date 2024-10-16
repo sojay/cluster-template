@@ -24,4 +24,4 @@ Brewfile.lock.json
 wiki
 # Bootstrap
 /config.yaml
-/kubernetes/apps/homepage/config.yaml
+/kubernetes/apps/homepage/config.yml
